@@ -1,0 +1,21 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite database
+habits.db
+
+# Logs
+logs.txt
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
