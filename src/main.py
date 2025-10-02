@@ -24,3 +24,25 @@ async def insert_habit(payload: dict):
     execute_query(query, payload)
     return {"status": "success"}
 
+@app.patch("/home/habits/{habit_id}")
+async def change_habit(habit_id: int, payload: dict):
+    if not payload:
+        return {"error": "No fields to update"}
+
+    # Add habit_id to payload for WHERE clause
+    payload["id"] = habit_id
+
+    set_clause = ", ".join([f"{k} = :{k}" for k in payload.keys()])
+    query = f"UPDATE habits SET {set_clause} WHERE id = :id"
+
+    execute_query(query, payload)
+
+    return {"status": "success"}
+
+@app.delete("/home/habits/{habit_id}")
+async def delete_habit(habit_id: int):
+    query = f"DELETE FROM habits WHERE id = :id"
+
+    execute_query(query,{"id":habit_id}) 
+
+    return {"status":"success"}

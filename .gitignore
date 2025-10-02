@@ -11,6 +11,8 @@ __pycache__/
 # SQLite database
 habits.db
 
+src/__init__.py
+
 # Logs
 logs.txt
 *.log
@@ -19,3 +21,5 @@ logs.txt
 .DS_Store
 Thumbs.db
 
+.env
+.treeignore
