@@ -11,6 +11,7 @@ def execute_query(query: str, params: dict = None):
                 db.execute(query, tuple(params.values()))
             else:
                 db.execute(query)
+            db.commit()
     except Exception as e:
         print(f"Failed because of {e}")
 
@@ -25,8 +26,9 @@ def paginate(params):
 
 def fetch_query( params):
     filters = params.get("filters", {})
-    columns = params.get("rows", "*")
-    query = f"SELECT {','.join(columns)} FROM habits"
+    columns = params.get("columns", [])
+    query = f"SELECT {','.join(columns) if columns else '*'} FROM habits"
+
     filter_clauses = []
     values = []
     for col, cond in filters.items():
